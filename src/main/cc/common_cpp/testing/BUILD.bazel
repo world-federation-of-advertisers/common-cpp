@@ -1,13 +1,12 @@
-package(
-    default_visibility = [
-        "//src/test/cc:__subpackages__",
-    ],
-)
+package(default_visibility = ["//visibility:public"])
 
 cc_library(
-    name = "matchers",
+    name = "status",
     testonly = True,
-    hdrs = ["matchers.h"],
+    hdrs = [
+        "status_macros.h",
+        "status_matchers.h",
+    ],
     deps = [
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/status:statusor",
@@ -24,9 +23,4 @@ cc_library(
         "@com_google_absl//absl/random",
         "@com_google_absl//absl/random:distributions",
     ],
-)
-
-cc_library(
-    name = "status_macros",
-    hdrs = ["status_macros.h"],
 )

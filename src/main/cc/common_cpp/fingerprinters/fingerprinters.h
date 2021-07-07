@@ -11,14 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-#ifndef SRC_MAIN_CC_ANY_SKETCH_FINGERPRINTERS_FINGERPRINTERS_H_
-#define SRC_MAIN_CC_ANY_SKETCH_FINGERPRINTERS_FINGERPRINTERS_H_
+#ifndef SRC_MAIN_CC_COMMON_CPP_FINGERPRINTERS_FINGERPRINTERS_H_
+#define SRC_MAIN_CC_COMMON_CPP_FINGERPRINTERS_FINGERPRINTERS_H_
 
 #include "absl/strings/string_view.h"
 #include "absl/types/span.h"
 
-namespace wfa::any_sketch {
+namespace wfa {
 
 class Fingerprinter {
  public:
@@ -35,6 +34,6 @@ class Fingerprinter {
 const Fingerprinter& GetSha256Fingerprinter();
 const Fingerprinter& GetFarmFingerprinter();
 
-}  // namespace wfa::any_sketch
+}  // namespace wfa
 
-#endif  // SRC_MAIN_CC_ANY_SKETCH_FINGERPRINTERS_FINGERPRINTERS_H_
+#endif  // SRC_MAIN_CC_COMMON_CPP_FINGERPRINTERS_FINGERPRINTERS_H_
