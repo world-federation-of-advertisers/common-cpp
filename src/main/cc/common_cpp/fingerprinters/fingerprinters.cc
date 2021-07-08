@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/main/cc/any_sketch/fingerprinters/fingerprinters.h"
+#include "src/main/cc/common_cpp/fingerprinters/fingerprinters.h"
 
 #include "absl/base/internal/endian.h"
 #include "openssl/sha.h"
 #include "src/farmhash.h"
 
-namespace wfa::any_sketch {
+namespace wfa {
 namespace {
 class Sha256Fingerprinter : public Fingerprinter {
  public:
@@ -59,4 +59,4 @@ const Fingerprinter& GetFarmFingerprinter() {
   static const auto* const fingerprinter = new FarmFingerprinter();
   return *fingerprinter;
 }
-}  // namespace wfa::any_sketch
+}  // namespace wfa

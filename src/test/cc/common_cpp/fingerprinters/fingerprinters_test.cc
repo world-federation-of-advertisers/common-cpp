@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/main/cc/any_sketch/fingerprinters/fingerprinters.h"
+#include "src/main/cc/common_cpp/fingerprinters/fingerprinters.h"
 
 #include "gtest/gtest.h"
 
-namespace wfa::any_sketch {
+namespace wfa {
 namespace {
 
 TEST(FingerprintersTest, Sha256) {
@@ -41,4 +41,4 @@ TEST(FingerprintersTest, Farm) {
 }
 
 }  // namespace
-}  // namespace wfa::any_sketch
+}  // namespace wfa

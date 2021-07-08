@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TEST_CC_TESTUTIL_MATCHERS_H_
-#define SRC_TEST_CC_TESTUTIL_MATCHERS_H_
+#ifndef SRC_MAIN_CC_COMMON_CPP_TESTING_STATUS_MATCHERS_H_
+#define SRC_MAIN_CC_COMMON_CPP_TESTING_STATUS_MATCHERS_H_
 
 #include <string>
 
@@ -55,4 +55,4 @@ MATCHER_P2(StatusIs, code, message, "") {
 }
 }  // namespace wfa
 
-#endif  // SRC_TEST_CC_TESTUTIL_MATCHERS_H_
+#endif  // SRC_MAIN_CC_COMMON_CPP_TESTING_STATUS_MATCHERS_H_

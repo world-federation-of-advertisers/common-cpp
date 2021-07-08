@@ -11,23 +11,23 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+#ifndef SRC_MAIN_CC_COMMON_CPP_TESTING_STATUS_MACROS_H_
+#define SRC_MAIN_CC_COMMON_CPP_TESTING_STATUS_MACROS_H_
 
 #include <utility>
 
-#ifndef SRC_TEST_CC_TESTUTIL_STATUS_MACROS_H_
-#define SRC_TEST_CC_TESTUTIL_STATUS_MACROS_H_
-
+#ifndef ASSERT_OK_AND_ASSIGN
 #define ASSERT_OK_AND_ASSIGN(lhs, rexpr) \
   ASSERT_OK_AND_ASSIGN_IMPL(             \
-      STATUS_MACROS_CONCAT_NAME(_status_or_value, __COUNTER__), lhs, rexpr)
+      STATUS_MACROS__CONCAT(_status_or_value, __COUNTER__), lhs, rexpr)
+#endif
 
 #define ASSERT_OK_AND_ASSIGN_IMPL(statusor, lhs, rexpr) \
   auto statusor = (rexpr);                              \
   ASSERT_TRUE(statusor.ok());                           \
   lhs = std::move(statusor).value()
 
-#define STATUS_MACROS_CONCAT_NAME(x, y) STATUS_MACROS_CONCAT_IMPL(x, y)
+#define STATUS_MACROS__CONCAT_INNER(x, y) x##y
+#define STATUS_MACROS__CONCAT(x, y) STATUS_MACROS_CONCAT_IMPL(x, y)
 
-#define STATUS_MACROS_CONCAT_IMPL(x, y) x##y
-
-#endif  // SRC_TEST_CC_TESTUTIL_STATUS_MACROS_H_
+#endif  // SRC_MAIN_CC_COMMON_CPP_TESTING_STATUS_MACROS_H_
