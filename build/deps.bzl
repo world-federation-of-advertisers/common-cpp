@@ -23,6 +23,9 @@ load("//build/googletest:repo.bzl", "googletest_repo")
 load("//build/com_github_glog_glog:repo.bzl", "com_github_glog_glog_repo")
 
 def common_cpp_deps():
+    """
+    Adds all external repos necessary for common-cpp.
+    """
     com_google_absl_repo()
     boringssl_repo()
     farmhash_repo()
