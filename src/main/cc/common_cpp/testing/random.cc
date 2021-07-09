@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/main/cc/common_cpp/testing/random.h"
+#include "common_cpp/testing/random.h"
 
 #include "absl/random/distributions.h"
 #include "absl/random/random.h"
