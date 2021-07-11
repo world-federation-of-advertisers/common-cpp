@@ -4,6 +4,7 @@ cc_library(
     name = "fingerprinters",
     srcs = ["fingerprinters.cc"],
     hdrs = ["fingerprinters.h"],
+    strip_include_prefix = "/src/main/cc",
     deps = [
         "@boringssl//:crypto",
         "@com_google_absl//absl/base:endian",

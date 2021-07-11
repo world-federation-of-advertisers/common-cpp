@@ -3,4 +3,5 @@ package(default_visibility = ["//visibility:public"])
 cc_library(
     name = "macros",
     hdrs = ["macros.h"],
+    strip_include_prefix = "/src/main/cc",
 )
