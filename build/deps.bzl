@@ -21,6 +21,7 @@ load("//build/boringssl:repo.bzl", "boringssl_repo")
 load("//build/farmhash:repo.bzl", "farmhash_repo")
 load("//build/googletest:repo.bzl", "googletest_repo")
 load("//build/com_github_glog_glog:repo.bzl", "com_github_glog_glog_repo")
+load("//build/com_google_private_join_and_compute:repo.bzl", "com_google_private_join_and_compute_repo")
 
 def common_cpp_deps():
     """
@@ -31,3 +32,4 @@ def common_cpp_deps():
     farmhash_repo()
     googletest_repo()
     com_github_glog_glog_repo()
+    com_google_private_join_and_compute_repo()
