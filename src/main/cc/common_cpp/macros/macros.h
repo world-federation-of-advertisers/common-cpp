@@ -16,10 +16,17 @@
 
 #include <utility>
 
+#ifndef RETURN_IF_ERROR
+#define RETURN_IF_ERROR(expr)    \
+  do {                           \
+    if (!expr.ok()) return expr; \
+  } while (false)
+#endif
+
 #ifndef ASSIGN_OR_RETURN
 #define ASSIGN_OR_RETURN(lhs, rexpr)                                          \
   MACROS__ASSIGN_OR_RETURN_IMPL(MACROS__CONCAT(status_or_value, __COUNTER__), \
-                                lhs, rexpr, message)
+                                lhs, rexpr)
 #endif
 
 #ifndef ASSIGN_OR_RETURN_ERROR
@@ -32,7 +39,7 @@
 #define MACROS__ASSIGN_OR_RETURN_IMPL(statusor, lhs, rexpr) \
   auto statusor = (rexpr);                                  \
   if (ABSL_PREDICT_FALSE(!statusor.ok())) {                 \
-    return statusor.status();                               \
+    return std::move(statusor).status();                    \
   }                                                         \
   lhs = std::move(statusor).value()
 
@@ -46,6 +53,6 @@
 
 // Internal helper for concatenating macro values.
 #define MACROS__CONCAT_INNER(x, y) x##y
-#define MACROS__CONCAT(x, y) COMMON_CPP_CONCAT_INNER(x, y)
+#define MACROS__CONCAT(x, y) MACROS__CONCAT_INNER(x, y)
 
 #endif  // SRC_MAIN_CC_COMMON_CPP_MACROS_MACROS_H_

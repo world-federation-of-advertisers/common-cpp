@@ -1,0 +1,12 @@
+cc_test(
+    name = "macros_test",
+    size = "small",
+    srcs = ["macros_test.cc"],
+    deps = [
+        "//src/main/cc/common_cpp/macros",
+        "//src/main/cc/common_cpp/testing:status",
+        "@com_google_absl//absl/status",
+        "@com_google_absl//absl/status:statusor",
+        "@googletest//:gtest_main",
+    ],
+)
