@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef SRC_MAIN_CC_WFA_COMMON_CPP_JNI_JNI_WRAP_H_
-#define SRC_MAIN_CC_WFA_COMMON_CPP_JNI_JNI_WRAP_H_
+#ifndef SRC_MAIN_CC_COMMON_CPP_JNI_JNI_WRAP_H_
+#define SRC_MAIN_CC_COMMON_CPP_JNI_JNI_WRAP_H_
 
 #include <string>
 
@@ -38,4 +38,4 @@ absl::StatusOr<std::string> JniWrap(
 
 }  // namespace wfa
 
-#endif  // SRC_MAIN_CC_WFA_COMMON_CPP_JNI_JNI_WRAP_H_
+#endif  // SRC_MAIN_CC_COMMON_CPP_JNI_JNI_WRAP_H_
