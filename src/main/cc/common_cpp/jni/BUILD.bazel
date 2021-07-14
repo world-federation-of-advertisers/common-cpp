@@ -5,15 +5,10 @@ package(default_visibility = ["//visibility:public"])
 _INCLUDE_PREFIX = "/src/main/cc"
 
 cc_library(
-    name = "macros",
-    hdrs = ["macros.h"],
-    strip_include_prefix = _INCLUDE_PREFIX,
-)
-
-cc_library(
     name = "deserialize_proto",
     hdrs = ["deserialize_proto.h"],
     strip_include_prefix = _INCLUDE_PREFIX,
+    visibility = ["//visibility:private"],
     deps = [
         "@com_google_absl//absl/status:statusor",
     ],
@@ -25,7 +20,7 @@ cc_library(
     strip_include_prefix = _INCLUDE_PREFIX,
     deps = [
         ":deserialize_proto",
-        ":macros",
+        "//src/main/cc/common_cpp/macros",
         "@com_google_absl//absl/status:statusor",
     ],
 )
