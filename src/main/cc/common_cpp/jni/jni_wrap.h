@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-#ifndef SRC_MAIN_CC_WFANET_PANELMATCH_COMMON_JNI_WRAP_H_
-#define SRC_MAIN_CC_WFANET_PANELMATCH_COMMON_JNI_WRAP_H_
+#ifndef SRC_MAIN_CC_COMMON_CPP_JNI_JNI_WRAP_H_
+#define SRC_MAIN_CC_COMMON_CPP_JNI_JNI_WRAP_H_
 
 #include <string>
 
 #include "absl/status/statusor.h"
-#include "util/status_macros.h"
-#include "wfanet/panelmatch/common/deserialize_proto.h"
+#include "common_cpp/jni/deserialize_proto.h"
+#include "common_cpp/macros/macros.h"
 
-namespace wfanet::panelmatch::common {
+namespace wfa {
 
 // Deserializes `serialized_request`, then calls `inner_function` on the
 // resulting proto, then serializes and returns the result.
@@ -36,6 +36,6 @@ absl::StatusOr<std::string> JniWrap(
   return response.SerializeAsString();
 }
 
-}  // namespace wfanet::panelmatch::common
+}  // namespace wfa
 
-#endif  // SRC_MAIN_CC_WFANET_PANELMATCH_COMMON_JNI_WRAP_H_
+#endif  // SRC_MAIN_CC_COMMON_CPP_JNI_JNI_WRAP_H_
