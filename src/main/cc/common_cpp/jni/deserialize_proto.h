@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_MAIN_CC_WFANET_PANELMATCH_COMMON_DESERIALIZE_PROTO_H_
-#define SRC_MAIN_CC_WFANET_PANELMATCH_COMMON_DESERIALIZE_PROTO_H_
+#ifndef SRC_MAIN_CC_COMMON_CPP_JNI_DESERIALIZE_PROTO_H_
+#define SRC_MAIN_CC_COMMON_CPP_JNI_DESERIALIZE_PROTO_H_
 
 #include <string>
 
 #include "absl/status/status.h"
 #include "absl/status/statusor.h"
 
-namespace wfanet::panelmatch::common {
+namespace wfa {
 
 // Parses `serialized_proto` into a T.
 template <typename T>
@@ -32,6 +32,6 @@ absl::StatusOr<T> DeserializeProto(const std::string& serialized_proto) {
   return proto;
 }
 
-}  // namespace wfanet::panelmatch::common
+}  // namespace wfa
 
-#endif  // SRC_MAIN_CC_WFANET_PANELMATCH_COMMON_DESERIALIZE_PROTO_H_
+#endif  // SRC_MAIN_CC_COMMON_CPP_JNI_DESERIALIZE_PROTO_H_
