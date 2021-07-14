@@ -41,7 +41,7 @@
   if (ABSL_PREDICT_FALSE(!statusor.ok())) {                 \
     return std::move(statusor).status();                    \
   }                                                         \
-  lhs = std::move(statusor).value()
+  lhs = *std::move(statusor)
 
 // Internal helper.
 #define MACROS__ASSIGN_OR_RETURN_ERROR_IMPL(statusor, lhs, rexpr, message) \
@@ -49,7 +49,7 @@
   if (ABSL_PREDICT_FALSE(!statusor.ok())) {                                \
     return absl::InvalidArgumentError(message);                            \
   }                                                                        \
-  lhs = std::move(statusor).value()
+  lhs = *std::move(statusor)
 
 // Internal helper for concatenating macro values.
 #define MACROS__CONCAT_INNER(x, y) x##y
