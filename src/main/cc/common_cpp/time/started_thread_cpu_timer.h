@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_MAIN_CC_WFA_MEASUREMENT_COMMON_TIME_STARTED_THREAD_CPU_TIMER_H_
-#define SRC_MAIN_CC_WFA_MEASUREMENT_COMMON_TIME_STARTED_THREAD_CPU_TIMER_H_
+#ifndef SRC_MAIN_CC_COMMON_CPP_TIME_STARTED_THREAD_CPU_TIMER_H_
+#define SRC_MAIN_CC_COMMON_CPP_TIME_STARTED_THREAD_CPU_TIMER_H_
 
 #include "absl/time/time.h"
 
@@ -43,4 +43,4 @@ class StartedThreadCpuTimer {
 
 }  // namespace wfa
 
-#endif  // SRC_MAIN_CC_WFA_MEASUREMENT_COMMON_TIME_STARTED_THREAD_CPU_TIMER_H_
+#endif  // SRC_MAIN_CC_COMMON_CPP_TIME_STARTED_THREAD_CPU_TIMER_H_

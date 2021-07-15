@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "wfa/measurement/common/time/started_thread_cpu_timer.h"
+#include "common_cpp/time/started_thread_cpu_timer.h"
 
 #include <ctime>
 
