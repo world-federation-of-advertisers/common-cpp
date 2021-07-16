@@ -28,6 +28,6 @@
   lhs = *std::move(statusor)
 
 #define STATUS_MACROS__CONCAT_INNER(x, y) x##y
-#define STATUS_MACROS__CONCAT(x, y) STATUS_MACROS_CONCAT_IMPL(x, y)
+#define STATUS_MACROS__CONCAT(x, y) STATUS_MACROS__CONCAT_INNER(x, y)
 
 #endif  // SRC_MAIN_CC_COMMON_CPP_TESTING_STATUS_MACROS_H_
