@@ -25,7 +25,7 @@
 #define ASSERT_OK_AND_ASSIGN_IMPL(statusor, lhs, rexpr) \
   auto statusor = (rexpr);                              \
   ASSERT_TRUE(statusor.ok());                           \
-  lhs = std::move(statusor).value()
+  lhs = *std::move(statusor)
 
 #define STATUS_MACROS__CONCAT_INNER(x, y) x##y
 #define STATUS_MACROS__CONCAT(x, y) STATUS_MACROS_CONCAT_IMPL(x, y)
