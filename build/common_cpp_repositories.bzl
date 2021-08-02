@@ -24,7 +24,7 @@ load("//build/googletest:repo.bzl", "googletest_repo")
 load("//build/com_github_glog_glog:repo.bzl", "com_github_glog_glog_repo")
 load("//build/com_google_private_join_and_compute:repo.bzl", "com_google_private_join_and_compute_repo")
 
-def common_cpp_deps_step_1():
+def common_cpp_repositories():
     """
     Adds all external repos necessary for common-cpp.
     """

@@ -1,9 +1,9 @@
 workspace(name = "wfa_common_cpp")
 
-load("//build:deps_step_1.bzl", "common_cpp_deps_step_1")
+load("//build:common_cpp_repositories.bzl", "common_cpp_repositories")
 
-common_cpp_deps_step_1()
+common_cpp_repositories()
 
-load("//build:deps_step_2.bzl", "common_cpp_deps_step_2")
+load("//build:common_cpp_deps.bzl", "common_cpp_deps")
 
-common_cpp_deps_step_2()
+common_cpp_deps()
