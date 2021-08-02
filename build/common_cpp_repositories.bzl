@@ -17,17 +17,19 @@ Adds all external repos necessary for common-cpp.
 """
 
 load("//build/com_google_absl:repo.bzl", "com_google_absl_repo")
+load("//build/com_google_protobuf:repo.bzl", "com_google_protobuf_repo")
 load("//build/boringssl:repo.bzl", "boringssl_repo")
 load("//build/farmhash:repo.bzl", "farmhash_repo")
 load("//build/googletest:repo.bzl", "googletest_repo")
 load("//build/com_github_glog_glog:repo.bzl", "com_github_glog_glog_repo")
 load("//build/com_google_private_join_and_compute:repo.bzl", "com_google_private_join_and_compute_repo")
 
-def common_cpp_deps():
+def common_cpp_repositories():
     """
     Adds all external repos necessary for common-cpp.
     """
     com_google_absl_repo()
+    com_google_protobuf_repo()
     boringssl_repo()
     farmhash_repo()
     googletest_repo()
