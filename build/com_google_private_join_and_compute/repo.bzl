@@ -20,11 +20,12 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def com_google_private_join_and_compute_repo():
     if "com_google_private_join_and_compute" not in native.existing_rules():
+        commit = "76477f8d9f0cd773e7e827ad032062ab6e2efd6c"
         http_archive(
             name = "com_google_private_join_and_compute",
-            sha256 = "13e0414220a2709b0dbeefafe5a4d1b3f3261a541d0405c844857521d5f25f32",
-            strip_prefix = "private-join-and-compute-89c8d0aae070b9c282043af419e47d7ef897f460",
+            sha256 = "087311356c52f2d896698bb7495114d0469fb830e04ecba682d39fe303657399",
+            strip_prefix = "private-join-and-compute-%s" % commit,
             urls = [
-                "https://github.com/google/private-join-and-compute/archive/89c8d0aae070b9c282043af419e47d7ef897f460.zip",
+                "https://github.com/google/private-join-and-compute/archive/%s.zip" % commit,
             ],
         )
