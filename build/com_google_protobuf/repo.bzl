@@ -26,3 +26,17 @@ def com_google_protobuf_repo():
             strip_prefix = "protobuf-3.15.7",
             urls = ["https://github.com/protocolbuffers/protobuf/releases/download/v3.15.7/protobuf-all-3.15.7.tar.gz"],
         )
+
+    # Also download rules_python. This is because `protobuf_deps()` in
+    # @com_google_protobuf//:protobuf_deps.bzl will install an ancient
+    # version of rules_python that causes problems like:
+    #
+    #  Error: file '@rules_python//python:pip.bzl' does not contain symbol
+    #  'pip_install'
+    #
+    # To work around this, we just depend on a newer version.
+    http_archive(
+        name = "rules_python",
+        urls = ["https://github.com/bazelbuild/rules_python/releases/download/0.3.0/rules_python-0.3.0.tar.gz"],
+        sha256 = "934c9ceb552e84577b0faf1e5a2f0450314985b4d8712b2b70717dc679fdc01b",
+    )
