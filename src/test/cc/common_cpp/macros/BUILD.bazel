@@ -7,6 +7,6 @@ cc_test(
         "//src/main/cc/common_cpp/testing:status",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/status:statusor",
-        "@googletest//:gtest_main",
+        "@com_google_googletest//:gtest_main",
     ],
 )

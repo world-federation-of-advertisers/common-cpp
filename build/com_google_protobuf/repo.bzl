@@ -18,13 +18,17 @@ Repository rules/macros for Protobuf.
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+COM_GOOGLE_PROTOBUF_VERSION = "3.17.3"
+
+_URL_TEMPLATE = "https://github.com/protocolbuffers/protobuf/releases/download/v%s/protobuf-all-%s.tar.gz"
+
 def com_google_protobuf_repo():
     if "com_google_protobuf" not in native.existing_rules():
         http_archive(
             name = "com_google_protobuf",
-            sha256 = "355cf346e6988fd219ff7b18e6e68a742aaef09a400a0cf2860e7841468a12ac",
-            strip_prefix = "protobuf-3.15.7",
-            urls = ["https://github.com/protocolbuffers/protobuf/releases/download/v3.15.7/protobuf-all-3.15.7.tar.gz"],
+            sha256 = "77ad26d3f65222fd96ccc18b055632b0bfedf295cb748b712a98ba1ac0b704b2",
+            strip_prefix = "protobuf-" + COM_GOOGLE_PROTOBUF_VERSION,
+            url = _URL_TEMPLATE % (COM_GOOGLE_PROTOBUF_VERSION, COM_GOOGLE_PROTOBUF_VERSION),
         )
 
     # Also download rules_python. This is because `protobuf_deps()` in
