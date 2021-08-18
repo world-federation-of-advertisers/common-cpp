@@ -18,10 +18,10 @@ Repository rules/macros for googletest library.
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-def googletest_repo():
-    if "googletest" not in native.existing_rules():
+def com_google_googletest_repo():
+    if "com_google_googletest" not in native.existing_rules():
         http_archive(
-            name = "googletest",
+            name = "com_google_googletest",
             sha256 = "353571c2440176ded91c2de6d6cd88ddd41401d14692ec1f99e35d013feda55a",
             strip_prefix = "googletest-release-1.11.0",
             urls = ["https://github.com/google/googletest/archive/release-1.11.0.zip"],
