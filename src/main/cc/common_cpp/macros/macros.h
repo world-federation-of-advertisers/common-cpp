@@ -35,6 +35,14 @@
       MACROS__CONCAT(status_or_value, __COUNTER__), lhs, rexpr, message)
 #endif
 
+#ifndef NULL_CHECK
+#define NULL_CHECK(val)  \
+  ({                     \
+    assert(val != NULL); \
+    val;                 \
+  })
+#endif
+
 // Internal helper.
 #define MACROS__ASSIGN_OR_RETURN_IMPL(statusor, lhs, rexpr) \
   auto statusor = (rexpr);                                  \

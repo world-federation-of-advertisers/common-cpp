@@ -19,11 +19,11 @@ Repository rules/macros for GLog.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("//build/com_github_gflags_gflags:repo.bzl", "com_github_gflags_gflags_repo")
 
-def com_github_glog_glog_repo():
+def com_github_google_glog_repo():
     com_github_gflags_gflags_repo()
-    if "com_github_glog_glog" not in native.existing_rules():
+    if "com_github_google_glog" not in native.existing_rules():
         http_archive(
-            name = "com_github_glog_glog",
+            name = "com_github_google_glog",
             sha256 = "f28359aeba12f30d73d9e4711ef356dc842886968112162bc73002645139c39c",
             strip_prefix = "glog-0.4.0",
             urls = ["https://github.com/google/glog/archive/v0.4.0.tar.gz"],
