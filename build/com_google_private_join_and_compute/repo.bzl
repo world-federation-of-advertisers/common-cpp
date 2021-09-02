@@ -19,6 +19,7 @@ Repository rules/macros for Private Join & Compute.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def com_google_private_join_and_compute_repo():
+    """Installs deps inclusing transitive deps for panel_exchange_client."""
     if "com_google_private_join_and_compute" not in native.existing_rules():
         commit = "8bc01b3f0b41a8ee80acee9ad5ae2c45bbdaef88"
         http_archive(
