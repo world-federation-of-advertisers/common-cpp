@@ -17,15 +17,15 @@ Repository rules/macros for Private Join & Compute.
 """
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("//build/com_github_grpc_grpc:repo.bzl", "com_github_grpc_grpc_repo")
 
 def com_google_private_join_and_compute_repo():
     if "com_google_private_join_and_compute" not in native.existing_rules():
-        commit = "8bc01b3f0b41a8ee80acee9ad5ae2c45bbdaef88"
+        commit = "b4d3de618b6dcf1c14265f5371d3e74151faf4ee"
         http_archive(
             name = "com_google_private_join_and_compute",
-            sha256 = "ea5e060f76c58787c4c7b71a8e1354ff04b117af6bbcdc5e466328657d497e06",
+            sha256 = "58cb2ac075a1722c3b31d5c1dd7a79cde92473558fb516ebe64152a6ed3f52b1",
             strip_prefix = "private-join-and-compute-%s" % commit,
-            urls = [
-                "https://github.com/google/private-join-and-compute/archive/%s.zip" % commit,
-            ],
+            url = "https://github.com/google/private-join-and-compute/archive/%s.zip" % commit,
         )
+        com_github_grpc_grpc_repo()

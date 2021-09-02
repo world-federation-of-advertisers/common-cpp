@@ -13,12 +13,18 @@
 # limitations under the License.
 
 """
-Runs external macros necessary for common-cpp.
+Repository rules/macros for GLog.
 """
 
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
-load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("//build/com_github_gflags_gflags:repo.bzl", "com_github_gflags_gflags_repo")
 
-def common_cpp_deps():
-    protobuf_deps()
-    grpc_deps()
+def com_github_google_glog_repo():
+    com_github_gflags_gflags_repo()
+    if "com_github_google_glog" not in native.existing_rules():
+        http_archive(
+            name = "com_github_google_glog",
+            sha256 = "21bc744fb7f2fa701ee8db339ded7dce4f975d0d55837a97be7d46e8382dea5a",
+            strip_prefix = "glog-0.5.0",
+            url = "https://github.com/google/glog/archive/v0.5.0.zip",
+        )
