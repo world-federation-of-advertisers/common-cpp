@@ -74,7 +74,7 @@ TEST(MacrosTest, AssignOrReturnMoves) {
   };
 
   absl::StatusOr<MoveOrCopyHelper> helper = run(MoveOrCopyHelper());
-  ASSERT_THAT(helper, IsOk());
+  ASSERT_THAT(helper.status(), IsOk());
   EXPECT_TRUE(helper->moved);
   EXPECT_FALSE(helper->copied);
 }

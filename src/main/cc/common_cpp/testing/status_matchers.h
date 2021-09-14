@@ -25,7 +25,11 @@
 namespace wfa {
 
 MATCHER(IsOk, "") {
-  return testing::ExplainMatchResult(true, arg.ok(), result_listener);
+  if (!arg.ok()) {
+    *result_listener << "expected OK status but got: " << arg;
+    return false;
+  }
+  return true;
 }
 
 MATCHER(IsNotOk, "") {
@@ -35,19 +39,16 @@ MATCHER(IsNotOk, "") {
 
 MATCHER_P(IsOkAndHolds, value, "") {
   if (arg.ok()) {
-    return testing::ExplainMatchResult(value, arg.value(), result_listener);
+    return testing::ExplainMatchResult(value, *arg, result_listener);
   }
 
-  *result_listener << "expected OK status instead of error code "
-                   << absl::StatusCodeToString(arg.status().code())
-                   << " and message " << arg.status();
+  *result_listener << "expected OK but got: " << arg.status();
   return false;
 }
 
 MATCHER_P2(StatusIs, code, message, "") {
   if (arg.code() != code) {
-    *result_listener << "Expected code: " << code << " but got code "
-                     << arg.code();
+    *result_listener << "Expected code: " << code << " but got " << arg;
     return false;
   }
   return testing::ExplainMatchResult(
