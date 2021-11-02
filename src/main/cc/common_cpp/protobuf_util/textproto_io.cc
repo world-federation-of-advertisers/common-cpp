@@ -15,6 +15,8 @@
 #ifndef SRC_MAIN_CC_COMMON_CPP_PROTOBUF_UTIL_TEXTPROTO_IO_H_
 #define SRC_MAIN_CC_COMMON_CPP_PROTOBUF_UTIL_TEXTPROTO_IO_H_
 
+#include "src/main/cc/common_cpp/protobuf_util/textproto_io.h"
+
 #include <fcntl.h>
 
 #include <filesystem>
