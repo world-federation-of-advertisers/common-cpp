@@ -1,0 +1,17 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+package(default_visibility = ["//visibility:public"])
+
+_INCLUDE_PREFIX = "/src/main/cc"
+
+cc_library(
+    name = "textproto_io",
+    srcs = ["textproto_io.cc"],
+    hdrs = ["textproto_io.h"],
+    strip_include_prefix = _INCLUDE_PREFIX,
+    deps = [
+        "@com_google_absl//absl/status",
+        "@com_google_absl//absl/strings",
+        "@com_google_protobuf//:protobuf",
+    ],
+)
