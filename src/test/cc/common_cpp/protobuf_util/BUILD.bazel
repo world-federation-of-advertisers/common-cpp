@@ -1,0 +1,30 @@
+load("@rules_cc//cc:defs.bzl", "cc_proto_library", "cc_test")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+package(default_visibility = ["//visibility:private"])
+
+_IMPORT_PREFIX = "/src/test/cc"
+
+proto_library(
+    name = "riegeli_io_test_proto",
+    srcs = ["riegeli_io_test.proto"],
+    strip_import_prefix = _IMPORT_PREFIX,
+)
+
+cc_proto_library(
+    name = "riegeli_io_test_cc_proto",
+    deps = [":riegeli_io_test_proto"],
+)
+
+cc_test(
+    name = "riegeli_io_test",
+    srcs = ["riegeli_io_test.cc"],
+    deps = [
+        ":riegeli_io_test_cc_proto",
+        "//src/main/cc/common_cpp/protobuf_util:riegeli_io",
+        "//src/main/cc/common_cpp/testing:common_matchers",
+        "//src/main/cc/common_cpp/testing:status",
+        "@com_google_absl//absl/status",
+        "@com_google_googletest//:gtest_main",
+    ],
+)
