@@ -23,7 +23,7 @@ def com_google_highwayhash_repo():
         commit = "276dd7b4b6d330e4734b756e97ccfb1b69cc2e12"
         http_archive(
             name = "com_google_highwayhash",
-            build_file = "//third_party:highwayhash.BUILD",
+            build_file = "//build/com_google_highwayhash:BUILD.external",
             sha256 = "cf891e024699c82aabce528a024adbe16e529f2b4e57f954455e0bf53efae585",
             strip_prefix = "highwayhash-%s" % commit,
             urls = [

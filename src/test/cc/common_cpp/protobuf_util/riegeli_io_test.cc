@@ -56,5 +56,32 @@ TEST(RiegeliIoTest, WriteAndRead) {
       << "Unable to remove file: " << filename;
 }
 
+TEST(RiegeliIoTest, ReadAndClearExistingMessages) {
+  RiegeliIoTestProto message_1;
+  message_1.set_a(1);
+  RiegeliIoTestProto message_2;
+  message_2.set_a(2);
+  RiegeliIoTestProto message_3;
+  message_3.set_a(3);
+  std::vector<RiegeliIoTestProto> messages = {message_1, message_2, message_3};
+
+  std::string filename = std::tmpnam(nullptr);
+
+  EXPECT_THAT(WriteRiegeliFile<RiegeliIoTestProto>(filename, messages), IsOk());
+
+  RiegeliIoTestProto message_4;
+  message_4.set_a(4);
+  std::vector<RiegeliIoTestProto> read_messages = {message_4};
+  EXPECT_THAT(ReadRiegeliFile<RiegeliIoTestProto>(filename, read_messages),
+              IsOk());
+
+  EXPECT_THAT(read_messages,
+              ElementsAre(EqualsProto(message_1), EqualsProto(message_2),
+                          EqualsProto(message_3)));
+
+  ASSERT_EQ(std::remove(filename.c_str()), 0)
+      << "Unable to remove file: " << filename;
+}
+
 }  // namespace
 }  // namespace wfa

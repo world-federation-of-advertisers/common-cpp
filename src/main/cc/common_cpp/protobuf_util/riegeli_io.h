@@ -30,20 +30,16 @@
 
 namespace wfa {
 
-using ::riegeli::FdReader;
-using ::riegeli::FdWriter;
-using ::riegeli::RecordReader;
-using ::riegeli::RecordWriter;
-
 // Read a list of protobuf messages to @messages. The input messages are from
-// the file with @path.
+// the file with @path. Any existing entity in the input @messages is cleared
+// before reading.
 // Return error status if the reading fails.
 // The details about the format of the input file can be found in
 // https://github.com/google/riegeli/blob/master/doc/riegeli_records_file_format.md
 template <typename Message>
 absl::Status ReadRiegeliFile(absl::string_view path,
                              std::vector<Message>& messages) {
-  RecordReader reader(FdReader(path, O_RDONLY));
+  riegeli::RecordReader reader(riegeli::FdReader(path, O_RDONLY));
   messages.clear();
   while (true) {
     Message message;
@@ -52,6 +48,9 @@ absl::Status ReadRiegeliFile(absl::string_view path,
         // EOF
         break;
       } else {
+        if (!reader.Close()) {
+          return reader.status();
+        }
         return absl::InvalidArgumentError(
             absl::StrCat("Unable to read message from file: ", path));
       }
@@ -71,21 +70,12 @@ absl::Status ReadRiegeliFile(absl::string_view path,
 template <typename Message>
 absl::Status WriteRiegeliFile(absl::string_view path,
                               const std::vector<Message>& messages) {
-  // Create the file at @path if not exists.
-  FILE* file = fopen(path.data(), "r");
-  if (!file) {
-    file = fopen(path.data(), "w");
-    if (!file) {
-      return absl::InternalError(absl::StrCat("Unable to create file: ", path));
-    }
-  }
-  if (fclose(file) != 0) {
-    return absl::InternalError(absl::StrCat("Unable to close file: ", path));
-  }
-
-  RecordWriter writer(FdWriter(path, O_WRONLY));
+  riegeli::RecordWriter writer(riegeli::FdWriter(path, O_WRONLY | O_CREAT));
   for (const Message& message : messages) {
     if (!writer.WriteRecord(message)) {
+      if (!writer.Close()) {
+        return writer.status();
+      }
       return absl::InvalidArgumentError(
           absl::StrCat("Unable to write message to file: ", path));
     }
