@@ -17,6 +17,10 @@ syntax = "proto3";
 
 package wfa.test;
 
-message RiegeliIoTestProto {
+message RiegeliIoTestProto1 {
+  optional int32 a = 1;
+}
+
+message RiegeliIoTestProto2 {
   optional int32 a = 1;
 }

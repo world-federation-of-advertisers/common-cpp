@@ -29,23 +29,25 @@ namespace wfa {
 namespace {
 
 using ::testing::ElementsAre;
-using ::wfa::test::RiegeliIoTestProto;
+using ::wfa::test::RiegeliIoTestProto1;
+using ::wfa::test::RiegeliIoTestProto2;
 
 TEST(RiegeliIoTest, WriteAndRead) {
-  RiegeliIoTestProto message_1;
+  RiegeliIoTestProto1 message_1;
   message_1.set_a(1);
-  RiegeliIoTestProto message_2;
+  RiegeliIoTestProto1 message_2;
   message_2.set_a(2);
-  RiegeliIoTestProto message_3;
+  RiegeliIoTestProto1 message_3;
   message_3.set_a(3);
-  std::vector<RiegeliIoTestProto> messages = {message_1, message_2, message_3};
+  std::vector<RiegeliIoTestProto1> messages = {message_1, message_2, message_3};
 
   std::string filename = std::tmpnam(nullptr);
 
-  EXPECT_THAT(WriteRiegeliFile<RiegeliIoTestProto>(filename, messages), IsOk());
+  EXPECT_THAT(WriteRiegeliFile<RiegeliIoTestProto1>(filename, messages),
+              IsOk());
 
-  std::vector<RiegeliIoTestProto> read_messages;
-  EXPECT_THAT(ReadRiegeliFile<RiegeliIoTestProto>(filename, read_messages),
+  std::vector<RiegeliIoTestProto1> read_messages;
+  EXPECT_THAT(ReadRiegeliFile<RiegeliIoTestProto1>(filename, read_messages),
               IsOk());
 
   EXPECT_THAT(read_messages,
@@ -57,27 +59,47 @@ TEST(RiegeliIoTest, WriteAndRead) {
 }
 
 TEST(RiegeliIoTest, ReadAndClearExistingMessages) {
-  RiegeliIoTestProto message_1;
+  RiegeliIoTestProto1 message_1;
   message_1.set_a(1);
-  RiegeliIoTestProto message_2;
+  RiegeliIoTestProto1 message_2;
   message_2.set_a(2);
-  RiegeliIoTestProto message_3;
+  RiegeliIoTestProto1 message_3;
   message_3.set_a(3);
-  std::vector<RiegeliIoTestProto> messages = {message_1, message_2, message_3};
+  std::vector<RiegeliIoTestProto1> messages = {message_1, message_2, message_3};
 
   std::string filename = std::tmpnam(nullptr);
 
-  EXPECT_THAT(WriteRiegeliFile<RiegeliIoTestProto>(filename, messages), IsOk());
+  EXPECT_THAT(WriteRiegeliFile<RiegeliIoTestProto1>(filename, messages),
+              IsOk());
 
-  RiegeliIoTestProto message_4;
+  RiegeliIoTestProto1 message_4;
   message_4.set_a(4);
-  std::vector<RiegeliIoTestProto> read_messages = {message_4};
-  EXPECT_THAT(ReadRiegeliFile<RiegeliIoTestProto>(filename, read_messages),
+  std::vector<RiegeliIoTestProto1> read_messages = {message_4};
+  EXPECT_THAT(ReadRiegeliFile<RiegeliIoTestProto1>(filename, read_messages),
               IsOk());
 
   EXPECT_THAT(read_messages,
               ElementsAre(EqualsProto(message_1), EqualsProto(message_2),
                           EqualsProto(message_3)));
+
+  ASSERT_EQ(std::remove(filename.c_str()), 0)
+      << "Unable to remove file: " << filename;
+}
+
+TEST(RiegeliIoTest, ReadWrongProto) {
+  RiegeliIoTestProto2 message;
+  message.set_a(1);
+  std::vector<RiegeliIoTestProto2> messages = {message};
+
+  std::string filename = std::tmpnam(nullptr);
+
+  EXPECT_THAT(WriteRiegeliFile<RiegeliIoTestProto2>(filename, messages),
+              IsOk());
+
+  std::vector<RiegeliIoTestProto1> read_messages;
+  EXPECT_THAT(ReadRiegeliFile<RiegeliIoTestProto1>(filename, read_messages),
+              StatusIs(absl::StatusCode::kInternal,
+                       "Unable to parse the file to the given message."));
 
   ASSERT_EQ(std::remove(filename.c_str()), 0)
       << "Unable to remove file: " << filename;
