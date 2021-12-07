@@ -48,13 +48,9 @@ absl::Status ReadRiegeliFile(absl::string_view path,
   while (reader.ReadRecord(any)) {
     if (!any.UnpackTo(&messages.emplace_back())) {
       messages.pop_back();
-      if (!reader.Close()) {
-        return reader.status();
-      }
       return absl::InternalError(
           "Unable to parse the file to the given message.");
     }
-    any.Clear();
   }
   if (!reader.Close()) {
     return reader.status();
@@ -79,10 +75,8 @@ absl::Status WriteRiegeliFile(absl::string_view path,
       return absl::InternalError("Fails to serialize the input message.");
     }
     if (!writer.WriteRecord(any)) {
-      writer.Close();
       return writer.status();
     }
-    any.Clear();
   }
   if (!writer.Close()) {
     return writer.status();
