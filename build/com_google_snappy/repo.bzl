@@ -22,7 +22,7 @@ def com_google_snappy_repo():
     if "com_google_snappy" not in native.existing_rules():
         http_archive(
             name = "com_google_snappy",
-            build_file = "//build/com_google_snappy:BUILD.external",
+            build_file = "@com_google_riegeli//third_party:snappy.BUILD",
             sha256 = "38b4aabf88eb480131ed45bfb89c19ca3e2a62daeb081bdf001cfb17ec4cd303",
             strip_prefix = "snappy-1.1.8",
             urls = [

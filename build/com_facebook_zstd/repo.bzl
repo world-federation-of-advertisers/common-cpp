@@ -22,7 +22,7 @@ def com_facebook_zstd_repo():
     if "com_facebook_zstd" not in native.existing_rules():
         http_archive(
             name = "com_facebook_zstd",
-            build_file = "//build/com_facebook_zstd:BUILD.external",
+            build_file = "@com_google_riegeli//third_party:net_zstd.BUILD",
             sha256 = "b6c537b53356a3af3ca3e621457751fa9a6ba96daf3aebb3526ae0f610863532",
             strip_prefix = "zstd-1.4.5/lib",
             urls = [
