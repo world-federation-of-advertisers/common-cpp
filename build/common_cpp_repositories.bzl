@@ -28,6 +28,7 @@ load("//build/farmhash:repo.bzl", "farmhash_repo")
 load("//build/com_google_googletest:repo.bzl", "com_google_googletest_repo")
 load("//build/com_github_google_glog:repo.bzl", "com_github_google_glog_repo")
 load("//build/com_google_private_join_and_compute:repo.bzl", "com_google_private_join_and_compute_repo")
+load("//build/com_github_grpc_grpc:repo.bzl", "com_github_grpc_grpc_repo")
 
 def common_cpp_repositories():
     """
@@ -40,6 +41,7 @@ def common_cpp_repositories():
     com_google_googletest_repo()
     com_github_google_glog_repo()
     com_google_private_join_and_compute_repo()
+    com_github_grpc_grpc_repo()
     com_google_brotli_repo()
     com_google_riegeli_repo()
     com_facebook_zstd_repo()
