@@ -32,7 +32,6 @@ load("//build/com_google_private_join_and_compute:repo.bzl", "com_google_private
 def common_cpp_repositories():
     """
     Adds all external repos necessary for common-cpp.
-    com_github_grpc_grpc_repo() is called in com_google_private_join_and_compute_repo()
     """
     com_google_absl_repo()
     com_google_protobuf_repo()
