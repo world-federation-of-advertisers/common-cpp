@@ -23,12 +23,17 @@
 #include "gtest/gtest.h"
 
 namespace wfa {
-absl::Status GetStatus(const absl::Status& status) { return status; }
+
+namespace internal {
+inline absl::Status GetStatus(const absl::Status& status) { return status; }
 
 template <class T>
-absl::Status GetStatus(const absl::StatusOr<T>& status) {
+inline absl::Status GetStatus(const absl::StatusOr<T>& status) {
   return status.status();
 }
+}  // namespace internal
+
+using internal::GetStatus;
 
 MATCHER(IsOk, "") {
   if (!arg.ok()) {
