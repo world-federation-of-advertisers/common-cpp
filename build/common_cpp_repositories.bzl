@@ -16,32 +16,34 @@
 Adds all external repos necessary for common-cpp.
 """
 
+load("//build/rules_proto:repo.bzl", "rules_proto")
+load("//build/com_github_grpc_grpc:repo.bzl", "com_github_grpc_grpc_repo")
 load("//build/com_facebook_zstd:repo.bzl", "com_facebook_zstd_repo")
 load("//build/com_google_absl:repo.bzl", "com_google_absl_repo")
 load("//build/com_google_brotli:repo.bzl", "com_google_brotli_repo")
 load("//build/com_google_highwayhash:repo.bzl", "com_google_highwayhash_repo")
-load("//build/com_google_protobuf:repo.bzl", "com_google_protobuf_repo")
-load("//build/com_google_riegeli:repo.bzl", "com_google_riegeli_repo")
+load("//build/com_google_riegeli:repo.bzl", "com_google_riegeli")
 load("//build/com_google_snappy:repo.bzl", "com_google_snappy_repo")
 load("//build/boringssl:repo.bzl", "boringssl_repo")
 load("//build/farmhash:repo.bzl", "farmhash_repo")
 load("//build/com_google_googletest:repo.bzl", "com_google_googletest_repo")
 load("//build/com_github_google_glog:repo.bzl", "com_github_google_glog_repo")
-load("//build/com_google_private_join_and_compute:repo.bzl", "com_google_private_join_and_compute_repo")
+load("//build/com_google_private_join_and_compute:repo.bzl", "com_google_private_join_and_compute")
 
 def common_cpp_repositories():
     """
     Adds all external repos necessary for common-cpp.
     """
     com_google_absl_repo()
-    com_google_protobuf_repo()
+    rules_proto()
     boringssl_repo()
     farmhash_repo()
     com_google_googletest_repo()
     com_github_google_glog_repo()
-    com_google_private_join_and_compute_repo()
+    com_github_grpc_grpc_repo()
+    com_google_private_join_and_compute()
     com_google_brotli_repo()
-    com_google_riegeli_repo()
+    com_google_riegeli()
     com_facebook_zstd_repo()
     com_google_highwayhash_repo()
     com_google_snappy_repo()

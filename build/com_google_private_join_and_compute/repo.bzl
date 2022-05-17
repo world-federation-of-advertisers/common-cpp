@@ -17,15 +17,23 @@ Repository rules/macros for Private Join & Compute.
 """
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("//build/com_github_grpc_grpc:repo.bzl", "com_github_grpc_grpc_repo")
+load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
-def com_google_private_join_and_compute_repo():
-    if "com_google_private_join_and_compute" not in native.existing_rules():
-        commit = "b4d3de618b6dcf1c14265f5371d3e74151faf4ee"
-        http_archive(
-            name = "com_google_private_join_and_compute",
-            sha256 = "58cb2ac075a1722c3b31d5c1dd7a79cde92473558fb516ebe64152a6ed3f52b1",
-            strip_prefix = "private-join-and-compute-%s" % commit,
-            url = "https://github.com/google/private-join-and-compute/archive/%s.zip" % commit,
-        )
-        com_github_grpc_grpc_repo()
+_COMMIT = "505ba981d66c9e5e73e18cfa647b4685f74784cb"
+_SHA_256 = "b1a83e1bc778fe902b782ae6d06fdf590a1f74684954c05592463ddad75f8ddb"
+
+def com_google_private_join_and_compute():
+    maybe(
+        http_archive,
+        name = "com_google_private_join_and_compute",
+        urls = [
+            "https://github.com/google/private-join-and-compute/archive/{commit}.tar.gz".format(commit = _COMMIT),
+        ],
+        strip_prefix = "private-join-and-compute-{commit}".format(commit = _COMMIT),
+        sha256 = _SHA_256,
+        repo_mapping = {
+            # TODO(bazelbuild/rules_proto#121): Remove this once
+            # protobuf_workspace is fixed.
+            "@com_google_protobuf": "@com_github_protocolbuffers_protobuf",
+        },
+    )
