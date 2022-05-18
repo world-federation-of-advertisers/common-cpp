@@ -16,9 +16,14 @@
 Runs external macros necessary for common-cpp.
 """
 
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+load(
+    "@rules_proto//proto:repositories.bzl",
+    "rules_proto_dependencies",
+    "rules_proto_toolchains",
+)
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
 
 def common_cpp_deps():
-    protobuf_deps()
+    rules_proto_dependencies()
+    rules_proto_toolchains()
     grpc_deps()
