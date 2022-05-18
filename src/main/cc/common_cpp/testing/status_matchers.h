@@ -24,9 +24,20 @@
 
 namespace wfa {
 
+namespace internal {
+inline absl::Status GetStatus(const absl::Status& status) { return status; }
+
+template <class T>
+inline absl::Status GetStatus(const absl::StatusOr<T>& status) {
+  return status.status();
+}
+}  // namespace internal
+
+using internal::GetStatus;
+
 MATCHER(IsOk, "") {
   if (!arg.ok()) {
-    *result_listener << "expected OK status but got: " << arg;
+    *result_listener << "expected OK status but got: " << GetStatus(arg);
     return false;
   }
   return true;
@@ -42,13 +53,14 @@ MATCHER_P(IsOkAndHolds, value, "") {
     return testing::ExplainMatchResult(value, *arg, result_listener);
   }
 
-  *result_listener << "expected OK but got: " << arg.status();
+  *result_listener << "expected OK but got: " << GetStatus(arg);
   return false;
 }
 
 MATCHER_P2(StatusIs, code, message, "") {
   if (arg.code() != code) {
-    *result_listener << "Expected code: " << code << " but got " << arg;
+    *result_listener << "Expected code: " << code << " but got "
+                     << GetStatus(arg);
     return false;
   }
   return testing::ExplainMatchResult(
