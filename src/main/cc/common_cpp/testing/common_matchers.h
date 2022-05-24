@@ -23,6 +23,13 @@ namespace wfa {
 
 // Returns true if two proto messages are equal, including the order of repeated
 // fields.
+MATCHER(EqualsProto, "") {
+  ::google::protobuf::util::MessageDifferencer differencer;
+  return differencer.Compare(std::get<0>(arg), std::get<1>(arg));
+}
+
+// Returns true if two proto messages are equal, including the order of repeated
+// fields.
 MATCHER_P(EqualsProto, expected, "") {
   ::google::protobuf::util::MessageDifferencer differencer;
   return differencer.Compare(arg, expected);
