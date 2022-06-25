@@ -22,9 +22,9 @@ cc_test(
     deps = [
         ":riegeli_io_test_cc_proto",
         "//src/main/cc/common_cpp/protobuf_util:riegeli_io",
-        "//src/main/cc/common_cpp/testing:common_matchers",
         "//src/main/cc/common_cpp/testing:status",
         "@com_google_absl//absl/status",
         "@com_google_googletest//:gtest_main",
+        "@nucleus//nucleus/testing:gunit_extras",
     ],
 )

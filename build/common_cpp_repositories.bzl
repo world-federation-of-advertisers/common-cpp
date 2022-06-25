@@ -29,6 +29,7 @@ load("//build/farmhash:repo.bzl", "farmhash_repo")
 load("//build/com_google_googletest:repo.bzl", "com_google_googletest_repo")
 load("//build/com_github_google_glog:repo.bzl", "com_github_google_glog_repo")
 load("//build/com_google_private_join_and_compute:repo.bzl", "com_google_private_join_and_compute")
+load("//build/nucleus:repo.bzl", "nucleus")
 
 def common_cpp_repositories():
     """
@@ -47,3 +48,4 @@ def common_cpp_repositories():
     com_facebook_zstd_repo()
     com_google_highwayhash_repo()
     com_google_snappy_repo()
+    nucleus()

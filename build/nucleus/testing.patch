@@ -1,0 +1,76 @@
+diff --git nucleus/testing/BUILD nucleus/testing/BUILD
+index d20e536..bbaecdb 100644
+--- nucleus/testing/BUILD
++++ nucleus/testing/BUILD
+@@ -40,11 +40,11 @@ cc_library(
+     ],
+     deps = [
+         "//nucleus/platform:types",
++        "@com_github_google_glog//:glog",
+         "@com_google_absl//absl/strings",
++        "@com_google_googletest//:gtest",
+         "@com_google_protobuf//:protobuf",
+         "@com_googlesource_code_re2//:re2",
+-        "@org_tensorflow//tensorflow/core:lib",
+-        "@org_tensorflow//tensorflow/core:test",
+     ],
+ )
+ 
+diff --git nucleus/testing/protocol-buffer-matchers.cc nucleus/testing/protocol-buffer-matchers.cc
+index 92a091e..3706696 100644
+--- nucleus/testing/protocol-buffer-matchers.cc
++++ nucleus/testing/protocol-buffer-matchers.cc
+@@ -28,19 +28,16 @@
+ #include "google/protobuf/text_format.h"
+ #include "google/protobuf/util/message_differencer.h"
+ 
+-#include <gmock/gmock-generated-matchers.h>
+ #include <gmock/gmock-matchers.h>
+ #include <gmock/gmock-more-matchers.h>
+ 
+-#include "tensorflow/core/platform/test.h"
+-
+ #include "re2/re2.h"
+ 
+ namespace nucleus {
+ namespace internal {
+ 
+ using absl::string_view;
+-using RegExpStringPiece = absl::string_view;  // copybara
++using RegExpStringPiece = re2::StringPiece;  // copybara
+ 
+ // Utilities.
+ 
+@@ -105,7 +102,7 @@ std::vector<const google::protobuf::FieldDescriptor*> GetFieldDescriptors(
+     }
+   }
+ 
+-  QCHECK(remaining_descriptors.empty())
++  CHECK(remaining_descriptors.empty())
+       << "Could not find fields for proto " << proto_descriptor->full_name()
+       << " with fully qualified names: "
+       << JoinStringPieces(remaining_descriptors, ",");
+diff --git nucleus/testing/protocol-buffer-matchers.h nucleus/testing/protocol-buffer-matchers.h
+index a17b853..01697b7 100644
+--- nucleus/testing/protocol-buffer-matchers.h
++++ nucleus/testing/protocol-buffer-matchers.h
+@@ -190,10 +190,10 @@
+ #include <string>  // NOLINT
+ #include <vector>  // NOLINT
+ 
+-#include <gmock/gmock-generated-matchers.h>
+ #include <gmock/gmock-matchers.h>
+ #include <gmock/gmock-more-matchers.h>
+ 
++#include <glog/logging.h>
+ 
+ #include "google/protobuf/io/zero_copy_stream.h"
+ #include "google/protobuf/io/zero_copy_stream_impl.h"
+@@ -205,7 +205,6 @@
+ #include "google/protobuf/util/message_differencer.h"
+ #include "absl/strings/string_view.h"
+ 
+-#include "tensorflow/core/platform/logging.h"
+ #include "nucleus/platform/types.h"
+ 
+ namespace nucleus {

@@ -20,14 +20,15 @@
 
 #include "absl/status/status.h"
 #include "common_cpp/protobuf_util/riegeli_io_test.pb.h"
-#include "common_cpp/testing/common_matchers.h"
 #include "common_cpp/testing/status_matchers.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "nucleus/testing/protocol-buffer-matchers.h"
 
 namespace wfa {
 namespace {
 
+using ::nucleus::EqualsProto;
 using ::testing::ElementsAre;
 using ::wfa::test::RiegeliIoTestProto1;
 using ::wfa::test::RiegeliIoTestProto2;
