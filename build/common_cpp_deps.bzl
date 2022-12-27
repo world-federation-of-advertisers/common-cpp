@@ -23,7 +23,19 @@ load(
 )
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
 
+# Dependencies for differential-privacy
+# Load dependencies for the cc workspace.
+load("@com_google_cc_differential_privacy//:cc_differential_privacy_deps.bzl", "cc_differential_privacy_deps")
+
+# Accounting dependencies.
+load("@com_google_cc_differential_privacy//:cc_accounting_deps.bzl", "cc_accounting_deps")
+
 def common_cpp_deps():
+    """
+    Runs transitive dependencies from external macros necessary for common-cpp.
+    """
     rules_proto_dependencies()
     rules_proto_toolchains()
     grpc_deps()
+    cc_differential_privacy_deps()
+    cc_accounting_deps()

@@ -18,5 +18,12 @@ Runs additional external macros necessary for common-cpp.
 
 load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
 
+# Extra dependencies for differential-privacy
+# Allows us to take source-dependencies on non-bazelified packages.
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
+load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
+
 def common_cpp_extra_deps():
     grpc_extra_deps()
+    rules_foreign_cc_dependencies()
+    boost_deps()
