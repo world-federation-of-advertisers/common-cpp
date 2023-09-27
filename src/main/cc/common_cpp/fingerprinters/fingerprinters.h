@@ -14,6 +14,8 @@
 #ifndef SRC_MAIN_CC_COMMON_CPP_FINGERPRINTERS_FINGERPRINTERS_H_
 #define SRC_MAIN_CC_COMMON_CPP_FINGERPRINTERS_FINGERPRINTERS_H_
 
+#include <cstdint>
+
 #include "absl/strings/string_view.h"
 #include "absl/types/span.h"
 
