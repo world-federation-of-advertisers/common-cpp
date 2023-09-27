@@ -23,14 +23,18 @@ namespace wfa {
 
 // Returns true if two proto messages are equal, including the order of repeated
 // fields.
-MATCHER_P(EqualsProto, expected, "") {
+[[deprecated("Use ::nucleus::EqualsProto")]] MATCHER_P(EqualsProto, expected,
+                                                       "") {
   ::google::protobuf::util::MessageDifferencer differencer;
   return differencer.Compare(arg, expected);
 }
 
 // Returns true if two proto messages are equal when ignoring the order of
 // repeated fields.
-MATCHER_P(EqualsProtoIgnoringRepeatedOrder, expected, "") {
+[[deprecated(
+    "Use IgnoringRepeatedFieldOrdering with "
+    "::nucleus::EqualsProto")]] MATCHER_P(EqualsProtoIgnoringRepeatedOrder,
+                                          expected, "") {
   ::google::protobuf::util::MessageDifferencer differencer;
   differencer.set_repeated_field_comparison(
       ::google::protobuf::util::MessageDifferencer::AS_SET);
