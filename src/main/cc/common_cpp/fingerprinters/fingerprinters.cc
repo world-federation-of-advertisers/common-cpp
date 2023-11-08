@@ -14,6 +14,8 @@
 
 #include "common_cpp/fingerprinters/fingerprinters.h"
 
+#include <string>
+
 #include "absl/base/internal/endian.h"
 #include "openssl/sha.h"
 #include "src/farmhash.h"
