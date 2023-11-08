@@ -34,8 +34,9 @@ class Fingerprinter {
 };
 
 const Fingerprinter& GetSha256Fingerprinter();
+Fingerprinter* GetSaltedSha256Fingerprinter(absl::string_view salt);
 const Fingerprinter& GetFarmFingerprinter();
-
+Fingerprinter* GetSaltedFarmFingerprinter(absl::string_view salt);
 }  // namespace wfa
 
 #endif  // SRC_MAIN_CC_COMMON_CPP_FINGERPRINTERS_FINGERPRINTERS_H_

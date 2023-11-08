@@ -21,9 +21,13 @@
 namespace wfa {
 namespace {
 class Sha256Fingerprinter : public Fingerprinter {
- public:
-  Sha256Fingerprinter() = default;
+ private:
+  std::string salt;
 
+ public:
+  explicit Sha256Fingerprinter(absl::string_view salt = "") {
+    this->salt = salt;
+  }
   ~Sha256Fingerprinter() override = default;
 
   uint64_t Fingerprint(absl::Span<const unsigned char> item) const override {
@@ -32,7 +36,13 @@ class Sha256Fingerprinter : public Fingerprinter {
     memset(digest, 0, sizeof(digest));
 
     SHA256_Init(&context);
-    SHA256_Update(&context, item.data(), item.size());
+    if (!salt.empty()) {
+      std::string salted_item(item.begin(), item.end());
+      salted_item += salt;
+      SHA256_Update(&context, salted_item.data(), salted_item.size());
+    } else {
+      SHA256_Update(&context, item.data(), item.size());
+    }
     SHA256_Final(digest, &context);
 
     return absl::little_endian::Load64(digest);
@@ -40,11 +50,19 @@ class Sha256Fingerprinter : public Fingerprinter {
 };
 
 class FarmFingerprinter : public Fingerprinter {
+ private:
+  std::string salt;
+
  public:
-  FarmFingerprinter() = default;
+  explicit FarmFingerprinter(absl::string_view salt = "") { this->salt = salt; }
   ~FarmFingerprinter() override = default;
 
   uint64_t Fingerprint(absl::Span<const unsigned char> item) const override {
+    if (!salt.empty()) {
+      std::string salted_item(item.begin(), item.end());
+      salted_item += salt;
+      return util::Fingerprint64(salted_item.data(), salted_item.size());
+    }
     return util::Fingerprint64(reinterpret_cast<const char*>(item.data()),
                                item.size());
   }
@@ -55,8 +73,17 @@ const Fingerprinter& GetSha256Fingerprinter() {
   static const auto* const fingerprinter = new Sha256Fingerprinter();
   return *fingerprinter;
 }
+
+Fingerprinter* GetSaltedSha256Fingerprinter(absl::string_view salt) {
+  return new Sha256Fingerprinter(salt);
+}
+
 const Fingerprinter& GetFarmFingerprinter() {
   static const auto* const fingerprinter = new FarmFingerprinter();
   return *fingerprinter;
+}
+
+Fingerprinter* GetSaltedFarmFingerprinter(absl::string_view salt) {
+  return new FarmFingerprinter(salt);
 }
 }  // namespace wfa
