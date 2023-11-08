@@ -40,8 +40,7 @@ TEST(FingerprintersTest, Farm) {
   EXPECT_EQ(fingerprinter.Fingerprint("vid"), 0x43A6944721C22C7);
 
   const std::string salt = "salt";
-  std::unique_ptr<Fingerprinter> salted_fingerprinter(
-      GetSaltedFarmFingerprinter(salt));
+  auto salted_fingerprinter = GetSaltedFarmFingerprinter(salt);
   EXPECT_EQ(salted_fingerprinter->Fingerprint(""), 0x3CAC4A31FEFB230B);
   EXPECT_EQ(salted_fingerprinter->Fingerprint("0"), 0x7A7B4D2365940F86);
   EXPECT_EQ(salted_fingerprinter->Fingerprint("12345"), 0xC61B65CC6C2C1E16);

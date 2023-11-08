@@ -76,8 +76,9 @@ const Fingerprinter& GetSha256Fingerprinter() {
   return *fingerprinter;
 }
 
-Fingerprinter* GetSaltedSha256Fingerprinter(absl::string_view salt) {
-  return new Sha256Fingerprinter(salt);
+std::unique_ptr<Fingerprinter> GetSaltedSha256Fingerprinter(
+    absl::string_view salt) {
+  return std::make_unique<Sha256Fingerprinter>(salt);
 }
 
 const Fingerprinter& GetFarmFingerprinter() {
@@ -85,7 +86,8 @@ const Fingerprinter& GetFarmFingerprinter() {
   return *fingerprinter;
 }
 
-Fingerprinter* GetSaltedFarmFingerprinter(absl::string_view salt) {
-  return new FarmFingerprinter(salt);
+std::unique_ptr<Fingerprinter> GetSaltedFarmFingerprinter(
+    absl::string_view salt) {
+  return std::make_unique<FarmFingerprinter>(salt);
 }
 }  // namespace wfa

@@ -15,6 +15,7 @@
 #define SRC_MAIN_CC_COMMON_CPP_FINGERPRINTERS_FINGERPRINTERS_H_
 
 #include <cstdint>
+#include <memory>
 
 #include "absl/strings/string_view.h"
 #include "absl/types/span.h"
@@ -34,9 +35,11 @@ class Fingerprinter {
 };
 
 const Fingerprinter& GetSha256Fingerprinter();
-Fingerprinter* GetSaltedSha256Fingerprinter(absl::string_view salt);
+std::unique_ptr<Fingerprinter> GetSaltedSha256Fingerprinter(
+    absl::string_view salt);
 const Fingerprinter& GetFarmFingerprinter();
-Fingerprinter* GetSaltedFarmFingerprinter(absl::string_view salt);
+std::unique_ptr<Fingerprinter> GetSaltedFarmFingerprinter(
+    absl::string_view salt);
 }  // namespace wfa
 
 #endif  // SRC_MAIN_CC_COMMON_CPP_FINGERPRINTERS_FINGERPRINTERS_H_
