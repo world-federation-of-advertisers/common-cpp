@@ -35,9 +35,16 @@ TEST(FingerprintersTest, Sha256) {
 TEST(FingerprintersTest, Farm) {
   const Fingerprinter& fingerprinter = GetFarmFingerprinter();
   EXPECT_EQ(fingerprinter.Fingerprint(""), 0x9ae16a3b2f90404f);
+  EXPECT_EQ(fingerprinter.Fingerprint("0"), 0xD2ED96073B81823F);
+  EXPECT_EQ(fingerprinter.Fingerprint("12345"), 0xE5B08D15925EBCF8);
+  EXPECT_EQ(fingerprinter.Fingerprint("vid"), 0x43A6944721C22C7);
 
-  // Verify that different strings give different results.
-  EXPECT_NE(fingerprinter.Fingerprint("not-an-empty-str"), 0x9ae16a3b2f90404f);
+  const std::string salt = "salt";
+  auto salted_fingerprinter = GetSaltedFarmFingerprinter(salt);
+  EXPECT_EQ(salted_fingerprinter->Fingerprint(""), 0x3CAC4A31FEFB230B);
+  EXPECT_EQ(salted_fingerprinter->Fingerprint("0"), 0x7A7B4D2365940F86);
+  EXPECT_EQ(salted_fingerprinter->Fingerprint("12345"), 0xC61B65CC6C2C1E16);
+  EXPECT_EQ(salted_fingerprinter->Fingerprint("vid"), 0xC3C55DC055B07504);
 }
 
 }  // namespace
