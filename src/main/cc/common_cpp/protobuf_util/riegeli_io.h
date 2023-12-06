@@ -42,7 +42,8 @@ namespace wfa {
 template <typename Message>
 absl::Status ReadRiegeliFile(absl::string_view path,
                              std::vector<Message>& messages) {
-  riegeli::RecordReader reader(riegeli::FdReader(path, O_RDONLY));
+  riegeli::RecordReader reader(
+      riegeli::FdReader(path, riegeli::FdReaderBase::Options()));
   messages.clear();
   google::protobuf::Any any;
   while (reader.ReadRecord(any)) {
@@ -68,7 +69,7 @@ template <typename Message>
 absl::Status WriteRiegeliFile(absl::string_view path,
                               const std::vector<Message>& messages) {
   riegeli::RecordWriter writer(
-      riegeli::FdWriter(path, O_WRONLY | O_CREAT | O_TRUNC));
+      riegeli::FdWriter(path, riegeli::FdWriterBase::Options()));
   google::protobuf::Any any;
   for (const Message& message : messages) {
     if (!any.PackFrom(message)) {
