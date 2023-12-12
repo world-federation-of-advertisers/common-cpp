@@ -34,9 +34,9 @@ def common_cpp_repositories():
     """
     Adds all external repos necessary for common-cpp.
     """
+    boringssl_repo()
     com_google_absl_repo()
     rules_proto()
-    boringssl_repo()
     farmhash_repo()
     com_google_googletest_repo()
     com_github_google_glog_repo()
