@@ -1,13 +1,13 @@
-# WFA CPP Common
+# common-cpp
 
-## Purpose
+Common libraries for World Federation of Advertisers (WFA) C++ repositories.
 
-Implementation of comnmon c++ dependencies for the wfa repositories. 
-
-### Technologies
+## Technologies
 
 *   [Bazel](https://bazel.build/)
-*   [gRPC](https://grpc.io/)
+*   [Protocol Buffers](https://protobuf.dev/)
+*   [Abseil](https://abseil.io/)
+*   [Riegeli](https://github.com/google/riegeli)
 
 ## Contributing
 
