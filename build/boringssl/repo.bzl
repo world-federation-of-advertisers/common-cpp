@@ -30,7 +30,6 @@ def boringssl_repo():
             sha256 = "e665a65074df16891f682a682741816f34b70c380ab37d4b7dd408ac091efffc",
             strip_prefix = "boringssl-%s" % commit,
             urls = [
-                #            "https://storage.googleapis.com/grpc-bazel-mirror/github.com/google/boringssl/archive/%s.tar.gz" % commit,
                 "https://github.com/google/boringssl/archive/%s.tar.gz" % commit,
             ],
         )
