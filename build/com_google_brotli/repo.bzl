@@ -20,13 +20,12 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def com_google_brotli_repo():
     if "com_google_brotli" not in native.existing_rules():
-        commit = "68f1b90ad0d204907beb58304d0bd06391001a4d"
+        version = "1.1.0"  # 2023-08-31
         http_archive(
             name = "org_brotli",
-            sha256 = "fec5a1d26f3dd102c542548aaa704f655fecec3622a24ec6e97768dcb3c235ff",
-            strip_prefix = "brotli-%s" % commit,
+            sha256 = "9d7ec775e67cdb3d0328f63f314b381d57f0f985499bbf2e55b15138a3621b19",
+            strip_prefix = "brotli-%s" % version,
             urls = [
-                "https://mirror.bazel.build/github.com/google/brotli/archive/%s.zip" % commit,
-                "https://github.com/google/brotli/archive/%s.zip" % commit,  # 2021-08-18
+                "https://github.com/google/brotli/archive/refs/tags/v%s.zip" % version,
             ],
         )
