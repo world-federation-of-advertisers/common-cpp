@@ -24,9 +24,9 @@ def com_google_absl_repo():
     if "com_google_absl" not in native.existing_rules():
         http_archive(
             name = "com_google_absl",
-            sha256 = "9a2b5752d7bfade0bdeee2701de17c9480620f8b237e1964c1b9967c75374906",
-            strip_prefix = "abseil-cpp-20230125.2",
+            sha256 = "987ce98f02eefbaf930d6e38ab16aa05737234d7afbab2d5c4ea7adbe50c28ed",
+            strip_prefix = "abseil-cpp-20230802.1",
             urls = [
-                "https://github.com/abseil/abseil-cpp/archive/refs/tags/20230125.2.tar.gz",
+                "https://github.com/abseil/abseil-cpp/archive/refs/tags/20230802.1.tar.gz",
             ],
         )
