@@ -24,7 +24,7 @@ def com_google_brotli_repo():
         http_archive(
             name = "org_brotli",
             sha256 = "9d7ec775e67cdb3d0328f63f314b381d57f0f985499bbf2e55b15138a3621b19",
-            strip_prefix = "brotli-1.1.0",
+            strip_prefix = "brotli-%s" % version,
             urls = [
                 "https://github.com/google/brotli/archive/refs/tags/v%s.zip" % version,
             ],
