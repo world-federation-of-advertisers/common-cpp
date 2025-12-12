@@ -17,8 +17,13 @@
 #include <cstdint>
 #include <memory>
 
+#include "absl/base/config.h"
 #include "absl/strings/string_view.h"
 #include "absl/types/span.h"
+
+#ifndef ABSL_IS_LITTLE_ENDIAN
+#error "Unsupported byte order: must be little-endian."
+#endif
 
 namespace wfa {
 
