@@ -14,9 +14,10 @@
 
 #include "common_cpp/fingerprinters/fingerprinters.h"
 
+#include <cstdint>
+#include <memory>
 #include <string>
 
-#include "absl/base/internal/endian.h"
 #include "openssl/sha.h"
 #include "src/farmhash.h"
 
@@ -47,7 +48,11 @@ class Sha256Fingerprinter : public Fingerprinter {
     }
     SHA256_Final(digest, &context);
 
-    return absl::little_endian::Load64(digest);
+    // Assume little endian. This is enforced by a preprocessor directive in the
+    // header.
+    uint64_t digest64;
+    std::memcpy(&digest64, digest, sizeof digest64);
+    return digest64;
   }
 };
 
