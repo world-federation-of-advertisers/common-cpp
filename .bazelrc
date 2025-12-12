@@ -8,9 +8,10 @@ build --repo_env='CC=clang'
 
 # Use C++17 language features.
 build --cxxopt='-std=c++17'
+build --host_cxxopt='-std=c++17'
 
-# Target JDK11.
-build --java_runtime_version=remotejdk_11
+# Use JDK 17.
+build --java_runtime_version=remotejdk_17
 
 # Build with address sanitizer (ASAN).
 build:asan --strip=never
