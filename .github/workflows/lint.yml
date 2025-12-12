@@ -8,28 +8,17 @@ on:
 jobs:
   lint:
     name: Lint changed files
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     defaults:
       run:
         shell: bash
     steps:
-    - name: Check out revision
-      uses: actions/checkout@v2
+    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       with:
         fetch-depth: 0
 
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: '11.0.10'
-        java-package: jdk
-        architecture: x64
-
-    - name: Set up linters
-      uses: world-federation-of-advertisers/actions/setup-linters@v1
-
     - name: Lint
-      uses: world-federation-of-advertisers/actions/lint@v1
+      uses: world-federation-of-advertisers/actions/lint@a9407321ceb8da9912face58a8139603678c869d # v2.5.0
       with:
         license-type: apache
         copyright-holder: The Cross-Media Measurement Authors
