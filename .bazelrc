@@ -10,6 +10,10 @@ build --repo_env='CC=clang'
 build --cxxopt='-std=c++17'
 build --host_cxxopt='-std=c++17'
 
+# Required by Riegeli with Clang: enables operator delete(void*, size_t).
+build --cxxopt='-fsized-deallocation'
+build --host_cxxopt='-fsized-deallocation'
+
 # Use JDK 17.
 build --java_runtime_version=remotejdk_17
 
