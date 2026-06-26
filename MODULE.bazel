@@ -6,7 +6,7 @@ module(
 # Bazel Central Registry modules.
 bazel_dep(
     name = "rules_cc",
-    version = "0.2.0",
+    version = "0.2.20",
 )
 bazel_dep(
     name = "rules_proto",
@@ -14,7 +14,7 @@ bazel_dep(
 )
 bazel_dep(
     name = "abseil-cpp",
-    version = "20250814.0",
+    version = "20260526.0",
     repo_name = "com_google_absl",
 )
 bazel_dep(
@@ -33,7 +33,7 @@ bazel_dep(
 )
 bazel_dep(
     name = "riegeli",
-    version = "0.0.0-20250822-9f2744d",
+    version = "0.0.0-20260422-86ff59b",
     repo_name = "com_google_riegeli",
 )
 
@@ -42,6 +42,8 @@ http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "ht
 http_archive(
     name = "farmhash",
     build_file_content = """
+load("@rules_cc//cc:defs.bzl", "cc_library")
+    
 package(default_visibility = ["//visibility:public"])
 
 cc_library(

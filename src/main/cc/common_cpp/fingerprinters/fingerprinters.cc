@@ -15,6 +15,7 @@
 #include "common_cpp/fingerprinters/fingerprinters.h"
 
 #include <cstdint>
+#include <cstring>
 #include <memory>
 #include <string>
 
