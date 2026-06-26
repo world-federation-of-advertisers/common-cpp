@@ -36,6 +36,13 @@ bazel_dep(
     version = "0.0.0-20260422-86ff59b",
     repo_name = "com_google_riegeli",
 )
+# DO_NOT_SUBMIT (testing)
+# Not used directly, but protobuf@34.1 brings rules_android@0.6.4 which is
+# incompatible with bazel 9.
+bazel_dep(
+    name = "rules_android",
+    version = "0.7.3",
+)
 
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
@@ -43,7 +50,7 @@ http_archive(
     name = "farmhash",
     build_file_content = """
 load("@rules_cc//cc:defs.bzl", "cc_library")
-    
+
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
